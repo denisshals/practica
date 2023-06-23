@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-light bg-light ">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <h3>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item mx-3"><a class="nav-link" th:href="@{/book}">Book</a></li>
+                        <li class="nav-item mx-3"><a class="nav-link" th:href="@{/bookShop}">Book shop</a></li>
+                        <li class="nav-item mx-3"><a class="nav-link" th:href="@{/publishingHouse}">Publishing house</a></li>
+                    </ul>
+                </h3>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <form action="#" th:action="@{/saveBook}" th:object="${book}" method="POST">
+            <div class="form-group my-3">
+                <label for="name">Name of book</label>
+                <input type="text" class="form-control w-25" id="name" placeholder="Enter name of book" th:field="*{name}">
+            </div>
+            <div class="form-group my-3">
+                <label for="price">Price of book</label>
+                <input type="number" step="0.01" class="form-control w-25" id="price" placeholder="Enter price of book" th:field="*{price}">
+            </div>
+            <div class="form-group my-3">
+                <label for="publishingHouse">Publishing house</label>
+                <select class="form-control w-25" th:field="*{publishingHouse}" id="publishingHouse">
+                    <option value="" selected hidden>Select publishing house</option>
+                    <option th:each="option : ${publishingHouseList}" th:value="${option.id}" th:text="${option.name} + ', ' + ${option.address}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

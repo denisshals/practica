@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book shop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand navbar-light bg-light ">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <h3>
+          <ul class="navbar-nav ">
+            <li class="nav-item mx-3"><a class="nav-link" th:href="@{/book}">Book</a></li>
+            <li class="nav-item mx-3"><a class="nav-link active" th:href="@{/bookShop}">Book shop</a></li>
+            <li class="nav-item mx-3"><a class="nav-link" th:href="@{/publishingHouse}">Publishing house</a></li>
+          </ul>
+        </h3>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <a th:href = "@{/newBookShopForm}" class="btn btn-secondary my-3">Add new record</a>
+    <table id="example" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="bookShop : ${bookShopList}" style="vertical-align: middle;">
+          <td th:text="${bookShop.name}"></td>
+          <td th:text="${bookShop.address}"></td>
+          <td>
+            <a th:href="@{/showFormForBookShopUpdate/{id}(id=${bookShop.id})}" class="btn btn-primary">Update</a>
+            <a th:href="@{/deleteBookShop/{id}(id=${bookShop.id})}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+    });
+  </script>
+</body>
+</html>
+
